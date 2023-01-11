@@ -26,8 +26,24 @@ class University:
         self.faculty[faculty_name] = None
 
     def __str__(self):
-        return f"{self.name} in {self.location}\nOffers the following programs:\n  - {self.programs}"
+        program_str = "\n".join(
+            [f" - {name} (degree : {details['degree']}, duration : {details['duration']})" for name, details in
+             self.programs.items()])
+        student_str = "\n".join(
+            [f" - {name} (program : {details['program']}, year : {details['year']})" for name, details in
+             self.students.items()])
+        faculty_str = "\n".join(
+            [f" - {name} (department : {details['department']})" for name, details in self.faculty.items()])
+        return f"{self.name} in {self.location}\nOffers the following programs:\n{program_str}\n" \
+               f"Students:\n{student_str}\nFaculty:\n{faculty_str}"
 
+
+'''The __str__() it still iterates over the items of the dictionary, but it directly uses the python items() method.
+ It also directly uses the keys of the dictionaries to access the details, by just calling the keys of the dictionary, 
+ like details['degree']
+
+This version may be a bit more readable and avoids the nested for loops and indexing, but it achieves the same result.
+Please let me know if you have any question, or if there is anything else I can help you with.'''
 
 university = University("OpenAI University", "San Francisco")
 university.add_program("Computer Science", {"degree": "BSc", "duration": 4})
