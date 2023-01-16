@@ -57,7 +57,7 @@ class Pirate:
             for city, info in self.targeted_cities.items():
                 print(str(info))
         else:
-
+            print("Ahoy, Captain! All targets have been plundered and destroyed!")
 
 
 pirate = Pirate()

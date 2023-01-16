@@ -1,8 +1,19 @@
-class Car():
-    def __init__(self, make, model, year):
+class Car:
+    def __init__(self, make, model, year, odometer_reading=0):
         self.make = make
         self.model = model
         self.year = year
+        self.odometer_reading = int(odometer_reading)
+
+
+class ElectricCar(Car):
+    def __init__(self, battery_size, make, model, year):
+        super().__init__(make, model, year)
+        self.battery_size = battery_size
+
+    def drive(self, miles):
+        self.odometer_reading -= miles
+        return self.odometer_reading
 
     def get_make(self):
         return self.make
@@ -12,6 +23,9 @@ class Car():
 
     def get_year(self):
         return self.year
+
+    def get_odometer_reading(self):
+        return self.odometer_reading
 
     def set_make(self, new_make):
         self.make = new_make
@@ -25,19 +39,33 @@ class Car():
         self.year = new_year
         return self.year
 
+    def set_odometer_reading(self, new_reading):
+        self.odometer_reading = new_reading
+        return self.odometer_reading
+
+    def drive(self, miles):
+        self.odometer_reading += miles
+
     def __str__(self):
         return f"{self.year} {self.make} {self.model}"
 
 
+# car = Car("Ford", "Mustang", 2020)
+# print(car.get_make())  # "Ford"
+# print(car.get_model())  # "Mustang"
+# print(car.get_year())  # 2020
+# car.set_make("Chevrolet")
+# print(car.get_make())  # "Chevrolet"
+# print(car)  # "2020 Chevrolet Mustang"
 
-car = Car("Ford", "Mustang", 2020)
-print(car.get_make())  # "Ford"
-print(car.get_model())  # "Mustang"
-print(car.get_year())  # 2020
-car.set_make("Chevrolet")
-print(car.get_make())  # "Chevrolet"
-print(car)  # "2020 Chevrolet Mustang"
 
+car = Car("Toyota", "Prius", 2020, 25000)
+print(car.get_make()) # "Toyota"
+print(car.get_model()) # "Prius"
+print(car.get_year()) # 2020
+print(car.get_odometer_reading()) # 25000
+car.drive(100)
+print(car.get_odometer_reading()) # 25100
 '''Create a class called Car that has three instance variables: make, model, and year.
 
 The class should have the following methods:
